@@ -10,7 +10,7 @@
     <link rel="icon" href="assets/logo.png">
 
     <!-- Bootstrap core CSS -->
-<link href="../workbenchsc/assets/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../workbenchsc/assets/dist/css/bootstrap.min.css" rel="stylesheet">
 
     <style>
       .bd-placeholder-img {
@@ -27,18 +27,172 @@
           font-size: 3.5rem;
         }
       }
+
+      #menuToggle
+      {
+        display: block;
+        position: fixed;
+        top: 50px;
+        left: 50px;
+        z-index: 1;
+        -webkit-user-select: none;
+        user-select: none;
+      }
+
+      #menuToggle a
+      {
+        text-decoration: none;
+        color: #232323;
+        transition: color 0.3s ease;
+      }
+
+      #menuToggle a:hover
+      {
+        color: #6C64FC;
+      }
+
+
+      #menuToggle input
+      {
+        display: block;
+        width: 40px;
+        height: 32px;
+        position: absolute;
+        top: -7px;
+        left: -5px;
+        cursor: pointer;
+        opacity: 0; /* hide this */
+        z-index: 2; /* and place it over the hamburger */
+        -webkit-touch-callout: none;
+      }
+
+      /*
+      * Just a quick hamburger
+      */
+      #menuToggle span
+      {
+        display: block;
+        width: 33px;
+        height: 4px;
+        margin-bottom: 5px;
+        position: relative;
+        background: #cdcdcd;
+        border-radius: 3px;
+        z-index: 1;
+        transform-origin: 4px 0px;
+        transition: transform 0.5s cubic-bezier(0.77,0.2,0.05,1.0),
+                    background 0.5s cubic-bezier(0.77,0.2,0.05,1.0),
+                    opacity 0.55s ease;
+      }
+
+      #menuToggle span:first-child
+      {
+        transform-origin: 0% 0%;
+      }
+
+      #menuToggle span:nth-last-child(2)
+      {
+        transform-origin: 0% 100%;
+      }
+
+      /* 
+      * Transform all the slices of hamburger
+      * into a crossmark.
+      */
+      #menuToggle input:checked ~ span
+      {
+        opacity: 1;
+        transform: rotate(45deg) translate(-2px, -1px);
+        background: #232323;
+      }
+
+      /*
+      * But let's hide the middle one.
+      */
+      #menuToggle input:checked ~ span:nth-last-child(3)
+      {
+        opacity: 0;
+        transform: rotate(0deg) scale(0.2, 0.2);
+      }
+
+      /*
+      * Ohyeah and the last one should go the other direction
+      */
+      #menuToggle input:checked ~ span:nth-last-child(2)
+      {
+        transform: rotate(-45deg) translate(0, -1px);
+      }
+
+      /*
+      * Make this absolute positioned
+      * at the top left of the screen
+      */
+      #menu
+      {
+        position: absolute;
+        width: 200px;
+        height: 110vh;
+        margin: -100px 0 0 -50px;
+        padding: 50px;
+        padding-top: 125px;
+        
+        background: #ededed;
+        list-style-type: none;
+        -webkit-font-smoothing: antialiased;
+        /* to stop flickering of text in safari */
+        
+        transform-origin: 0% 0%;
+        transform: translate(-100%, 0);
+        
+        transition: transform 0.5s cubic-bezier(0.77,0.2,0.05,1.0);
+      }
+
+      #menu li
+      {
+        padding: 10px 0;
+        font-size: 1rem;
+      }
+
+      /*
+      * And let's slide it in from the left
+      */
+      #menuToggle input:checked ~ ul
+      {
+        transform: none;
+      }
+
+      #apply {
+        border: #6C64FC solid 1px;
+      }
+
+      #apply:hover {
+        background-color: #6C64FC;
+      }
     </style>
     <!-- Custom styles for this template -->
     <link href="product.css" rel="stylesheet">
   </head>
   <body>
-    <nav class="site-header sticky-top py-1">
-  <div class="container d-flex flex-column flex-md-row justify-content-between">
-    <a class="py-2 d-none d-md-inline-block" href="index.html">Home</a>
-    <a class="py-2 d-none d-md-inline-block" href="faq.html">FAQ</a>
-    <a class="py-2 d-none d-md-inline-block" href="https://docs.google.com/forms/d/e/1FAIpQLSdTY88uUYp5O2PjMc4H34L_8ZY7Ij4BYW5Cl4zo9AtVAHttDQ/viewform ">Apply</a>
-  </div>
-</nav>
+    <!-- <nav class="site-header sticky-top py-1">
+      <div class="container d-flex flex-column flex-md-row justify-content-between">
+        <a class="py-2 d-none d-md-inline-block" href="index.html">Home</a>
+        <a class="py-2 d-none d-md-inline-block" href="faq.html">FAQ</a>
+        <a class="py-2 d-none d-md-inline-block" href="https://docs.google.com/forms/d/e/1FAIpQLSdTY88uUYp5O2PjMc4H34L_8ZY7Ij4BYW5Cl4zo9AtVAHttDQ/viewform ">Apply</a>
+      </div>
+    </nav> -->
+    <nav role="navigation">
+      <div id="menuToggle">
+        <input type="checkbox" />
+        <span></span>
+        <span></span>
+        <span></span>
+        <ul id="menu">
+          <a href="index.html"><li>Home</li></a>
+          <a href="faq.html"><li>FAQ</li></a>
+          <a href="https://docs.google.com/forms/d/e/1FAIpQLSdTY88uUYp5O2PjMc4H34L_8ZY7Ij4BYW5Cl4zo9AtVAHttDQ/viewform" target="_blank"><li>Apply</li></a>
+        </ul>
+      </div>
+    </nav>
 
 <!-- 
 <div class="">
@@ -57,7 +211,7 @@
   <div class="col-md-12 p-lg-12 mx-auto my-5 text-center">
     <h1 class="display-4 font-weight-bold">The WorkBench Cup</h1>
     <p class="lead font-weight-normal">A USC venture competition made by Trojans, for Trojans.</p>
-    <a class="btn btn-outline-secondary btn-lg mt-3" href="https://docs.google.com/forms/d/e/1FAIpQLSdTY88uUYp5O2PjMc4H34L_8ZY7Ij4BYW5Cl4zo9AtVAHttDQ/viewform">Apply Now</a>
+    <a class="btn btn-outline-secondary btn-lg mt-3" id="apply" href="https://docs.google.com/forms/d/e/1FAIpQLSdTY88uUYp5O2PjMc4H34L_8ZY7Ij4BYW5Cl4zo9AtVAHttDQ/viewform" target="_blank">Apply Now</a>
   </div>
 </div>
 
@@ -70,7 +224,7 @@
       <img src="assets/svgs/collaborate.svg" width="100%" height="auto"></img>
     </div>
     <div class="col-md-6">
-      <h2 class="featurette-heading font mb-4">1. Collaborate <span class="text-muted"></span></h2>
+      <h2 class="featurette-heading font mb-4 mt-5 mt-sm-1">1. Collaborate <span class="text-muted"></span></h2>
       <p class="lead">A five part series, our founders spend their first four meetings workshopping their pitches as a cohort. At WorkBench, we emphasize practicing in a collaborative environment. We find that often the best advice comes from fellow founders.</p>
     </div>
   </div>
@@ -79,7 +233,7 @@
 
   <div class="row featurette d-flex flex-row justify-content-between align-items-top">
     <div class="col-md-6">
-      <h2 class="featurette-heading font mb-4 text-right">2. Consult <span class="text-muted"></span></h2>
+      <h2 class="featurette-heading font mb-4 mt-5 mt-sm-1 text-right">2. Consult <span class="text-muted"></span></h2>
       <p class="lead text-right">The WorkBench Leadership Family hosts office hours for founders to refine their pitches throughout the entire program.</p>
     </div>
     <div class="col-md-5">
@@ -94,7 +248,7 @@
       <img src="assets/svgs/compete.svg" width="100%" height="auto"></img>
     </div>
     <div class="col-md-6">
-      <h2 class="featurette-heading font mb-4">3. Compete <span class="text-muted"></span></h2>
+      <h2 class="featurette-heading font mb-4 mt-5 mt-sm-1">3. Compete <span class="text-muted"></span></h2>
       <p class="lead">Our fifth and final meeting will be judged by a panel of experts and attended by industry professionals, where we will award our first place WorkBench Cup Prize.</p>
     </div>
   </div>
@@ -274,13 +428,13 @@
     <hr class="featurette-divider">
 
     <!-- Three columns of text below the carousel -->
-    <h1 class="mb-5"> Our Team </h1>
+    <h1> Our Team </h1>
 
     <div class="row">
-      <div class="col-lg-3">
-        <img src="assets/team/andrew.jpg" width="100%" height="100%" style="object-fit: cover"/>
+      <div class="col-6 col-lg-3 mt-5">
+        <img src="assets/team/andrew.jpg" width="100%" height="100%" style="object-fit: cover; border-radius: 10px;"/>
       </div>
-      <div class="col-lg-3 d-flex flex-column">
+      <div class="col-6 col-lg-3 d-flex flex-column mt-5">
         <h4>Andrew Brilliant</h4>
         <!-- <div class="d-flex flex-row align-middle mb-3">
           <h6 class="mr-1 mt-1">President</h6>
@@ -296,10 +450,10 @@
           </svg>
         </a>   -->
       </div>
-      <div class="col-lg-3">
-        <img src="assets/team/edenburkow.webp" width="100%" height="100%" style="object-fit: cover"/>
+      <div class="col-6 col-lg-3 mt-5">
+        <img src="assets/team/edenburkow.webp" width="100%" height="100%" style="object-fit: cover; border-radius: 10px;"/>
       </div>
-      <div class="col-lg-3 d-flex flex-column">
+      <div class="col-6 col-lg-3 d-flex flex-column mt-5">
         <h4>Eden Burkow</h4>
         <h6 class="mt-1">Director of Marketing</h6>
         <div class="dropdown-divider"></div>
@@ -308,8 +462,8 @@
         <p class="mt-3" style="font-size: 0.75rem;">"I love stories, storytelling, and storycrafting. Every startup has a story, and I am passionate about helping founders find their own."</p>
       </div>
     </div>
-    <div class="row mt-5">
-      <div class="col-lg-3 d-flex flex-column">
+    <div class="row">
+      <div class="col-6 col-lg-3 d-flex flex-column mt-5">
         <h4 class="text-right">Alec Jenab</h4>
         <h6 class="mt-1 text-right">Director of Operations</h6>
         <div class="dropdown-divider"></div>
@@ -317,10 +471,10 @@
         <div class="dropdown-divider"></div>
         <p class="mt-3 text-right" style="font-size: 0.75rem;">"Startups expedite innovation and impact in a way no other form will allow."</p>
       </div>
-      <div class="col-lg-3">
-        <img src="assets/team/alecjenab.webp" width="100%" height="100%" style="object-fit: cover"/>
+      <div class="col-6 col-lg-3 mt-5">
+        <img src="assets/team/alecjenab.webp" width="100%" height="100%" style="object-fit: cover; border-radius: 10px;"/>
       </div>
-      <div class="col-lg-3 d-flex flex-column">
+      <div class="col-6 col-lg-3 d-flex flex-column mt-5">
         <h4 class="text-right">Greg Turong</h4>
         <h6 class="mt-1 text-right">Director of Finance</h6>
         <div class="dropdown-divider"></div>
@@ -328,15 +482,15 @@
         <div class="dropdown-divider"></div>
         <p class="mt-3 text-right" style="font-size: 0.75rem;">"I love stories, storytelling, and storycrafting. Every startup has a story, and I am passionate about helping founders find their own."</p>
       </div>
-      <div class="col-lg-3">
-        <img src="assets/team/gregturong.webp" width="100%" height="100%" style="object-fit: cover"/>
+      <div class="col-6 col-lg-3 mt-5">
+        <img src="assets/team/gregturong.webp" width="100%" height="100%" style="object-fit: cover; border-radius: 10px;"/>
       </div>
     </div>
-    <div class="row mt-5">
-      <div class="col-lg-3">
-        <img src="assets/team/yashvijaju.webp" width="100%" height="100%" style="object-fit: cover"/>
+    <div class="row">
+      <div class="col-6 col-lg-3 mt-5">
+        <img src="assets/team/yashvijaju.webp" width="100%" height="100%" style="object-fit: cover; border-radius: 10px;"/>
       </div>
-      <div class="col-lg-3 d-flex flex-column">
+      <div class="col-6 col-lg-3 d-flex flex-column mt-5">
         <h4>Yashvi Jaju</h4>
         <h6 class="mt-1">Director of Tech</h6>
         <div class="dropdown-divider"></div>
@@ -344,10 +498,10 @@
         <div class="dropdown-divider"></div>
         <p class="mt-3" style="font-size: 0.75rem;">"Startups are proof that some ideas are too important to leave untried."</p>
       </div>
-      <div class="col-lg-3">
-        <img src="assets/team/freddyrio.webp" width="100%" height="100%" style="object-fit: cover"/>
+      <div class="col-6 col-lg-3 mt-5">
+        <img src="assets/team/freddyrio.webp" width="100%" height="100%" style="object-fit: cover; border-radius: 10px;"/>
       </div>
-      <div class="col-lg-3 d-flex flex-column">
+      <div class="col-6 col-lg-3 d-flex flex-column mt-5">
         <h4>Freddy Rio</h4>
         <h6 class="mt-1">Director of Product</h6>
         <div class="dropdown-divider"></div>
@@ -366,8 +520,8 @@
 
   <div class="row">
     <div class="col-12 col-md">
-      <img src="assets/logo.png" width="10%" height="auto"></img>
-      <small class="d-block mb-3 text-muted">&copy; 2017-2020</small>
+      <img src="assets/logo.png" width="25%" height="auto"></img>
+      <small class="d-block my-3 text-muted">&copy; 2017-2020</small>
     </div>
     <div class="col-6 col-md">
       <h5>Social Media</h5>

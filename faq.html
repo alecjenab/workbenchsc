@@ -26,35 +26,187 @@
           font-size: 3.5rem;
         }
       }
+
+      
+      #menuToggle
+      {
+        display: block;
+        position: fixed;
+        top: 50px;
+        left: 50px;
+        z-index: 1;
+        -webkit-user-select: none;
+        user-select: none;
+      }
+
+      #menuToggle a
+      {
+        text-decoration: none;
+        color: #232323;
+        transition: color 0.3s ease;
+      }
+
+      #menuToggle a:hover
+      {
+        color: #6C64FC;
+      }
+
+
+      #menuToggle input
+      {
+        display: block;
+        width: 40px;
+        height: 32px;
+        position: absolute;
+        top: -7px;
+        left: -5px;
+        cursor: pointer;
+        opacity: 0; /* hide this */
+        z-index: 2; /* and place it over the hamburger */
+        -webkit-touch-callout: none;
+      }
+
+      /*
+      * Just a quick hamburger
+      */
+      #menuToggle span
+      {
+        display: block;
+        width: 33px;
+        height: 4px;
+        margin-bottom: 5px;
+        position: relative;
+        background: #cdcdcd;
+        border-radius: 3px;
+        z-index: 1;
+        transform-origin: 4px 0px;
+        transition: transform 0.5s cubic-bezier(0.77,0.2,0.05,1.0),
+                    background 0.5s cubic-bezier(0.77,0.2,0.05,1.0),
+                    opacity 0.55s ease;
+      }
+
+      #menuToggle span:first-child
+      {
+        transform-origin: 0% 0%;
+      }
+
+      #menuToggle span:nth-last-child(2)
+      {
+        transform-origin: 0% 100%;
+      }
+
+      /* 
+      * Transform all the slices of hamburger
+      * into a crossmark.
+      */
+      #menuToggle input:checked ~ span
+      {
+        opacity: 1;
+        transform: rotate(45deg) translate(-2px, -1px);
+        background: #232323;
+      }
+
+      /*
+      * But let's hide the middle one.
+      */
+      #menuToggle input:checked ~ span:nth-last-child(3)
+      {
+        opacity: 0;
+        transform: rotate(0deg) scale(0.2, 0.2);
+      }
+
+      /*
+      * Ohyeah and the last one should go the other direction
+      */
+      #menuToggle input:checked ~ span:nth-last-child(2)
+      {
+        transform: rotate(-45deg) translate(0, -1px);
+      }
+
+      /*
+      * Make this absolute positioned
+      * at the top left of the screen
+      */
+      #menu
+      {
+        position: absolute;
+        width: 200px;
+        height: 110vh;
+        margin: -100px 0 0 -50px;
+        padding: 50px;
+        padding-top: 125px;
+        
+        background: #ededed;
+        list-style-type: none;
+        -webkit-font-smoothing: antialiased;
+        /* to stop flickering of text in safari */
+        
+        transform-origin: 0% 0%;
+        transform: translate(-100%, 0);
+        
+        transition: transform 0.5s cubic-bezier(0.77,0.2,0.05,1.0);
+      }
+
+      #menu li
+      {
+        padding: 10px 0;
+        font-size: 1rem;
+      }
+
+      /*
+      * And let's slide it in from the left
+      */
+      #menuToggle input:checked ~ ul
+      {
+        transform: none;
+      }
     </style>
     <!-- Custom styles for this template -->
     <link href="product.css" rel="stylesheet">
   </head>
   <body>
-    <nav class="site-header sticky-top py-1">
-  <div class="container d-flex flex-column flex-md-row justify-content-between">
-    <a class="py-2 d-none d-md-inline-block" href="index.html">Home</a>
-    <a class="py-2 d-none d-md-inline-block" href="faq.html">FAQ</a>
-    <a class="py-2 d-none d-md-inline-block" href="https://docs.google.com/forms/d/e/1FAIpQLSdTY88uUYp5O2PjMc4H34L_8ZY7Ij4BYW5Cl4zo9AtVAHttDQ/viewform ">Apply</a>
-  </div>
-</nav>
+    <!-- <nav class="site-header sticky-top py-1">
+      <div class="container d-flex flex-column flex-md-row justify-content-between">
+        <a class="py-2 d-none d-md-inline-block" href="index.html">Home</a>
+        <a class="py-2 d-none d-md-inline-block" href="faq.html">FAQ</a>
+        <a class="py-2 d-none d-md-inline-block" href="https://docs.google.com/forms/d/e/1FAIpQLSdTY88uUYp5O2PjMc4H34L_8ZY7Ij4BYW5Cl4zo9AtVAHttDQ/viewform ">Apply</a>
+      </div>
+    </nav> -->
+    <nav role="navigation">
+      <div id="menuToggle">
+        <input type="checkbox" />
+        <span></span>
+        <span></span>
+        <span></span>
+        <ul id="menu">
+          <a href="index.html"><li>Home</li></a>
+          <a href="faq.html"><li>FAQ</li></a>
+          <a href="https://docs.google.com/forms/d/e/1FAIpQLSdTY88uUYp5O2PjMc4H34L_8ZY7Ij4BYW5Cl4zo9AtVAHttDQ/viewform" target="_blank"><li>Apply</li></a>
+        </ul>
+      </div>
+    </nav>
 
 
 <!-- Marketing messaging and featurettes
   ================================================== -->
   <!-- Wrap the rest of the page in another container to center all the content. -->
 
+  <div class="container d-flex flex-column align-items-center mt-5">
+    <img src="assets/svgs/faq.svg" width="75%" height="auto">
+    <div class="col-md-12 p-lg-12 mx-auto my-5 text-center">
+      <h1 class="display-4 font-weight-bold">Frequently Asked Questions</h1>
+    </div>
+  </div>
 
 
   <div class="container marketing">
-    <br>
-    <br>
+
+    <hr class="featurette-divider">
+
 
     <!-- START THE FEATURETTES -->
 
-    <h1> Frequently Asked Questions </h1>
-
-    <hr class="featurette-divider">
+    <!-- <h1 class="mb-5 pb-5"> Frequently Asked Questions </h1> -->
 
     <h4> When is the Spring 2021 application deadline? </h4>
     <p> Our Spring 2021 application closes on February 21st at 11:59 PM PST.  We will spend the following week doing final round interviews with our top candidates, before finalizing the cohort on March 2nd.</p>
