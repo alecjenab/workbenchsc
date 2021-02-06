@@ -99,6 +99,13 @@
 }
 
 
+
+.carousel-control-next,
+.carousel-control-prev, .carousel-indicators {
+    filter: invert(100%);
+}
+
+
 /* MARKETING CONTENT
 -------------------------------------------------- */
 
